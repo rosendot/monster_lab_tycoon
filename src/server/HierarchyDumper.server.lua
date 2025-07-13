@@ -1,4 +1,6 @@
-local INCLUDE = {
+local ENABLE_LOGGING = false
+
+local INCLUDED_SERVICES = {
     ["Workspace"] = true,
     ["ReplicatedStorage"] = true,
     ["ServerScriptService"] = true,
@@ -10,11 +12,10 @@ local INCLUDE = {
 local function dump(object, indent)
     indent = indent or ""
 
-    if object == game or INCLUDE[object.Name] or object:IsDescendantOf(workspace) or
-        object:IsDescendantOf(game:GetService("ReplicatedStorage")) or
-        object:IsDescendantOf(game:GetService("ServerScriptService")) or
-        object:IsDescendantOf(game:GetService("StarterPlayer")) or object:IsDescendantOf(game:GetService("StarterGui")) or
-        object:IsDescendantOf(game:GetService("ServerStorage")) then
+    if object == game or INCLUDED_SERVICES[object.Name] or object:IsDescendantOf(game.Workspace) or
+        object:IsDescendantOf(game.ReplicatedStorage) or object:IsDescendantOf(game.ServerScriptService) or
+        object:IsDescendantOf(game.StarterPlayer) or object:IsDescendantOf(game.StarterGui) or
+        object:IsDescendantOf(game.ServerStorage) then
         print(indent .. object.Name .. " [" .. object.ClassName .. "]")
         for _, child in ipairs(object:GetChildren()) do
             dump(child, indent .. "  ")
@@ -22,4 +23,6 @@ local function dump(object, indent)
     end
 end
 
-dump(game)
+if ENABLE_LOGGING then
+    dump(game)
+end
