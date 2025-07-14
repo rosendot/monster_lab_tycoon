@@ -1,4 +1,4 @@
-local pad = workspace:WaitForChild("BioCoinCollectorPad")
+local pad = workspace:WaitForChild("BioCoinCollector")
 local displayGui = pad:FindFirstChild("BioCoinDisplayGui")
 local display = displayGui and displayGui:FindFirstChild("TextLabel")
 

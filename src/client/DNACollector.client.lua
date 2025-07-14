@@ -1,4 +1,4 @@
-local pad = workspace:WaitForChild("CollectorPad")
+local pad = workspace:WaitForChild("DNACollector")
 local displayGui = pad:FindFirstChild("DNADisplayGui")
 local display = displayGui and displayGui:FindFirstChild("TextLabel")
 
@@ -7,7 +7,7 @@ local function updateDisplay()
 	if not display then return end
 	local totalDNA = 0
 	for _, item in pairs(workspace:GetChildren()) do
-		if item:IsA("IntValue") and item.Name == "DNA" then
+		if item:IsA("IntValue") and item.Name == "DNADrop" then
 			totalDNA += item.Value
 		end
 	end
@@ -29,7 +29,7 @@ pad.Touched:Connect(function(hit)
 
 	if player and player:FindFirstChild("leaderstats") then
 		for _, item in pairs(workspace:GetChildren()) do
-			if item:IsA("IntValue") and item.Name == "DNA" then
+			if item:IsA("IntValue") and item.Name == "DNADrop" then
 				player.leaderstats.DNA.Value += item.Value
 				item:Destroy()
 			end
