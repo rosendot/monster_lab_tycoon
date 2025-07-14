@@ -8,4 +8,6 @@ while true do
     dnaDrop.Name = "DNADrop"
     dnaDrop.Value = dnaAmount
     dnaDrop.Parent = workspace
+
+    print("[DNAGenerator] Created DNADrop with value:", dnaDrop.Value)
 end

@@ -1,4 +1,3 @@
--- PlayerStatsSetup
 game.Players.PlayerAdded:Connect(function(player)
     local stats = Instance.new("Folder")
     stats.Name = "leaderstats"
@@ -13,4 +12,6 @@ game.Players.PlayerAdded:Connect(function(player)
     dna.Name = "DNA"
     dna.Value = 0
     dna.Parent = stats
+
+    print("[PlayerStats] Setup for", player.Name)
 end)
