@@ -15,7 +15,6 @@ local function updateDisplay()
 	textLabel.Text = "BioCoins: " .. totalCoins
 end
 
--- Update display every second
 while true do
 	updateDisplay()
 	task.wait(1)

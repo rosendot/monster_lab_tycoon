@@ -12,6 +12,4 @@ game.Players.PlayerAdded:Connect(function(player)
     dna.Name = "DNA"
     dna.Value = 0
     dna.Parent = stats
-
-    print("[PlayerStats] Setup for", player.Name)
 end)

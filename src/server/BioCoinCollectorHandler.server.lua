@@ -4,14 +4,12 @@ coinCollector.Touched:Connect(function(hit)
 	local character = hit:FindFirstAncestorOfClass("Model")
 	local player = game.Players:GetPlayerFromCharacter(character)
 	if not player then
-		warn("[BioCoinCollector] No player from touch")
 		return
 	end
 
 	local stats = player:FindFirstChild("leaderstats")
 	local coinStat = stats and stats:FindFirstChild("BioCoins")
 	if not coinStat then
-		warn("[BioCoinCollector] Missing leaderstats or BioCoins for", player.Name)
 		return
 	end
 
@@ -23,11 +21,5 @@ coinCollector.Touched:Connect(function(hit)
 			coinStat.Value += item.Value
 			item:Destroy()
 		end
-	end
-
-	if collected > 0 then
-		print("[BioCoinCollector] " .. player.Name .. " collected BioCoins:", collected, "| New Total:", coinStat.Value)
-	else
-		print("[BioCoinCollector] " .. player.Name .. " touched pad, but no BioCoin drops present")
 	end
 end)

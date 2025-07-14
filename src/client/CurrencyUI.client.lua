@@ -67,7 +67,7 @@ bioCoinLabel.Size = UDim2.new(1, -10, 1, 0)
 bioCoinLabel.Position = UDim2.new(0, 10, 0, 0)
 bioCoinLabel.BackgroundTransparency = 1
 bioCoinLabel.Text = "🪙 BioCoins: 0"
-bioCoinLabel.TextColor3 = Color3.fromRGB(255, 215, 0) -- Gold color
+bioCoinLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
 bioCoinLabel.TextScaled = true
 bioCoinLabel.Font = Enum.Font.SourceSansBold
 bioCoinLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -92,7 +92,7 @@ dnaLabel.Size = UDim2.new(1, -10, 1, 0)
 dnaLabel.Position = UDim2.new(0, 10, 0, 0)
 dnaLabel.BackgroundTransparency = 1
 dnaLabel.Text = "🧬 DNA: 0"
-dnaLabel.TextColor3 = Color3.fromRGB(0, 255, 127) -- Green color
+dnaLabel.TextColor3 = Color3.fromRGB(0, 255, 127)
 dnaLabel.TextScaled = true
 dnaLabel.Font = Enum.Font.SourceSansBold
 dnaLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -156,5 +156,3 @@ TweenService:Create(bioCoinLabel, TweenInfo.new(0.5), {
 TweenService:Create(dnaLabel, TweenInfo.new(0.5), {
     TextTransparency = 0
 }):Play()
-
-print("Currency UI loaded successfully!")

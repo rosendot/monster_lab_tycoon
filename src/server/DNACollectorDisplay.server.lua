@@ -15,9 +15,7 @@ local function updateDisplay()
 	textLabel.Text = "DNA: " .. totalDNA
 end
 
--- Update display every second
 while true do
 	updateDisplay()
 	task.wait(1)
 end
- 
