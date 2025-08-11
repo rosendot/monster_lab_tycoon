@@ -1,6 +1,7 @@
--- ConveyorBelt.server.lua (optimized)
+-- ConveyorBelt.server.lua (dynamic flow direction)
 -- Tracks *only* things touching belts, then forces their along-belt velocity.
 -- Supports multiple belts via CollectionService tag: "ConveyorBelt"
+-- Flow direction auto-picks the longest horizontal dimension (X vs Z).
 
 local RunService = game:GetService("RunService")
 local CollectionService = game:GetService("CollectionService")
@@ -22,7 +23,13 @@ type BeltState = {
 
 local belts: {BeltState} = {}
 
--- Build a thin, invisible sensor that slightly hovers over the belt top face.
+-- Helpers
+local function topSensorCFrame(belt: BasePart): CFrame
+	-- place it flush with the belt top
+	local topOffset = CFrame.new(0, (belt.Size.Y/2) + (TOUCH_HEIGHT/2) + 0.01, 0)
+	return belt.CFrame * topOffset
+end
+
 local function makeSensorFor(belt: BasePart): BasePart
 	local sensor = Instance.new("Part")
 	sensor.Name = "ConveyorSensor"
@@ -32,9 +39,7 @@ local function makeSensorFor(belt: BasePart): BasePart
 	sensor.CanTouch = true
 	sensor.Transparency = 1
 	sensor.Size = Vector3.new(belt.Size.X, TOUCH_HEIGHT, belt.Size.Z)
-	-- place it flush with the belt top
-	local topOffset = CFrame.new(0, (belt.Size.Y/2) + (TOUCH_HEIGHT/2) + 0.01, 0)
-	sensor.CFrame = belt.CFrame * topOffset
+	sensor.CFrame = topSensorCFrame(belt)
 	sensor.Parent = belt
 	return sensor
 end
@@ -46,6 +51,21 @@ local function readBeltSpeed(belt: BasePart): number
 	return 16
 end
 
+local function isReversed(belt: BasePart): boolean
+	local rev = belt:GetAttribute("ConveyorReverse")
+	return rev == true
+end
+
+-- Return the local unit direction for flow based on the longest *horizontal* size.
+-- If Z > X, use local Z (LookVector). Otherwise use local X (RightVector).
+-- Ties default to X for consistency on squares.
+local function dominantFlowDir(belt: BasePart): Vector3
+	local sx, sz = belt.Size.X, belt.Size.Z
+	local dir = (sz > sx) and belt.CFrame.LookVector or belt.CFrame.RightVector
+	if isReversed(belt) then dir = -dir end
+	return dir
+end
+
 local function initBelt(belt: BasePart)
 	-- Avoid duplicates
 	for _, bs in ipairs(belts) do
@@ -54,7 +74,7 @@ local function initBelt(belt: BasePart)
 
 	local sensor = makeSensorFor(belt)
 	local speed = readBeltSpeed(belt)
-	local dir = belt.CFrame.RightVector -- move along local +X; flip by setting negative speed
+	local dir = dominantFlowDir(belt) -- dynamic axis pick
 
 	local state: BeltState = {
 		belt = belt,
@@ -65,18 +85,26 @@ local function initBelt(belt: BasePart)
 	}
 	table.insert(belts, state)
 
-	-- Keep sensor aligned if the belt moves/rotates
+	-- Keep sensor aligned/resized if the belt moves/rotates/resizes
 	belt:GetPropertyChangedSignal("CFrame"):Connect(function()
 		if sensor and sensor.Parent then
-			local topOffset = CFrame.new(0, (belt.Size.Y/2) + (TOUCH_HEIGHT/2) + 0.01, 0)
-			sensor.CFrame = belt.CFrame * topOffset
+			sensor.CFrame = topSensorCFrame(belt)
+		end
+	end)
+	belt:GetPropertyChangedSignal("Size"):Connect(function()
+		if sensor and sensor.Parent then
+			sensor.Size = Vector3.new(belt.Size.X, TOUCH_HEIGHT, belt.Size.Z)
+			sensor.CFrame = topSensorCFrame(belt)
 		end
 	end)
 
-	-- If speed attribute changes live
+	-- Live attribute updates
 	belt.AttributeChanged:Connect(function(attr)
 		if attr == "ConveyorSpeed" then
 			state.speed = readBeltSpeed(belt)
+		elseif attr == "ConveyorReverse" then
+			-- next tick will pick up new direction; also recompute once now
+			state.dir = dominantFlowDir(belt)
 		end
 	end)
 
@@ -136,8 +164,8 @@ do
 				if bs.sensor then bs.sensor:Destroy() end
 				table.remove(belts, i)
 			else
-				-- Refresh direction every tick in case the belt rotated
-				bs.dir = bs.belt.CFrame.RightVector
+				-- Refresh direction every tick in case the belt rotated or size changed
+				bs.dir = dominantFlowDir(bs.belt)
 				local speed = bs.speed
 
 				-- Nudge everything currently touching
