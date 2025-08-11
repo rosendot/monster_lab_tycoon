@@ -1,0 +1,18 @@
+{
+    "name": "monster-lab-tycoon",
+    "version": "1.0.0",
+    "description": "A Roblox tycoon game about building and managing monster laboratories",
+    "private": true,
+    "scripts": {
+        "analyze": "node scripts/analyze-codebase.js",
+        "structure": "npm run analyze"
+    },
+    "keywords": [
+        "roblox",
+        "tycoon",
+        "game",
+        "monsters",
+        "lua"
+    ],
+    "author": "Your Name Here"
+}

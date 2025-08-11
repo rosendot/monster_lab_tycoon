@@ -1,0 +1,42 @@
+🏗️  MONSTER LAB TYCOON - CODEBASE ANALYSIS
+📅 Generated: 2025-08-11T06:47:00.785Z
+=============================================================
+
+📊 PROJECT STATISTICS:
+   📁 Total Directories: 0
+   📄 Total Files: 16
+   📝 Total Lines of Code: 970
+
+📋 FILE TYPES:
+   .lua: 11 files
+   .json: 2 files
+   .js: 1 files
+   .txt: 1 files
+   .md: 1 files
+
+🌳 PROJECT STRUCTURE:
+└── MonsterLabTycoon 📁
+    ├── scripts 📁
+    │   └── analyze-codebase.js (180 lines)
+    ├── src 📁
+    │   ├── client 📁
+    │   │   └── CurrencyUI.client.lua (159 lines) 🌙
+    │   ├── server 📁
+    │   │   ├── BioCoinCollectorDisplay.server.lua (21 lines) 🌙
+    │   │   ├── BioCoinCollectorHandler.server.lua (25 lines) 🌙
+    │   │   ├── BioCoinGenerator.server.lua (11 lines) 🌙
+    │   │   ├── BuyButtonHandler.server.lua (44 lines) 🌙
+    │   │   ├── ConveyorBelt.server.lua (88 lines) 🌙
+    │   │   ├── DNACollectorDisplay.server.lua (21 lines) 🌙
+    │   │   ├── DNACollectorHandler.server.lua (25 lines) 🌙
+    │   │   ├── DNAGenerator.server.lua (11 lines) 🌙
+    │   │   ├── HierarchyDumper.server.lua (29 lines) 🌙
+    │   │   └── PlayerStatsSetup.server.lua (16 lines) 🌙
+    │   ├── Shared 📁
+    │   └── Hierarchy.txt (101 lines)
+    ├── default.project.json (27 lines) ⚙️
+    ├── package.json (18 lines) ⚙️
+    └── README.md (194 lines) 📝
+
+=============================================================
+📊 Analysis complete! Found 16 files in 0 directories.
