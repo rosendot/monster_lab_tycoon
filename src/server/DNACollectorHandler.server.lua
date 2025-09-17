@@ -1,4 +1,6 @@
 local DNACollector = workspace:WaitForChild("DNACollector")
+local globalStorage = workspace:WaitForChild("GlobalStorage")
+local playerStorages = globalStorage:WaitForChild("PlayerStorages")
 
 DNACollector.Touched:Connect(function(hit)
     local character = hit:FindFirstAncestorOfClass("Model")
@@ -14,9 +16,7 @@ DNACollector.Touched:Connect(function(hit)
     end
 
     -- Get player's personal storage
-    local globalStorage = workspace:FindFirstChild("GlobalStorage")
-    local playerStorages = globalStorage and globalStorage:FindFirstChild("PlayerStorages")
-    local playerStorage = playerStorages and playerStorages:FindFirstChild(player.Name)
+    local playerStorage = playerStorages:FindFirstChild(player.Name)
     local dnaAccumulator = playerStorage and playerStorage:FindFirstChild("AccumulatedDNA")
 
     if not dnaAccumulator or dnaAccumulator.Value <= 0 then

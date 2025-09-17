@@ -1,4 +1,6 @@
 local coinCollector = workspace:WaitForChild("BioCoinCollector")
+local globalStorage = workspace:WaitForChild("GlobalStorage")
+local playerStorages = globalStorage:WaitForChild("PlayerStorages")
 
 coinCollector.Touched:Connect(function(hit)
     local character = hit:FindFirstAncestorOfClass("Model")
@@ -14,9 +16,7 @@ coinCollector.Touched:Connect(function(hit)
     end
 
     -- Get player's personal storage
-    local globalStorage = workspace:FindFirstChild("GlobalStorage")
-    local playerStorages = globalStorage and globalStorage:FindFirstChild("PlayerStorages")
-    local playerStorage = playerStorages and playerStorages:FindFirstChild(player.Name)
+    local playerStorage = playerStorages:FindFirstChild(player.Name)
     local coinAccumulator = playerStorage and playerStorage:FindFirstChild("AccumulatedCoins")
 
     if not coinAccumulator or coinAccumulator.Value <= 0 then

@@ -1,20 +1,9 @@
 local dnaAmount = 10
 local cooldown = 3
 
--- Get or create global storage container
-local globalStorage = workspace:FindFirstChild("GlobalStorage")
-if not globalStorage then
-    globalStorage = Instance.new("Folder")
-    globalStorage.Name = "GlobalStorage"
-    globalStorage.Parent = workspace
-end
-
-local playerStorages = globalStorage:FindFirstChild("PlayerStorages")
-if not playerStorages then
-    playerStorages = Instance.new("Folder")
-    playerStorages.Name = "PlayerStorages"
-    playerStorages.Parent = globalStorage
-end
+-- Expect GlobalStorage to already exist
+local globalStorage = workspace:WaitForChild("GlobalStorage")
+local playerStorages = globalStorage:WaitForChild("PlayerStorages")
 
 -- Function to get or create player's storage
 local function getPlayerStorage(player)
