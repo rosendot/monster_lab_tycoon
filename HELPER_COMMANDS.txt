@@ -1,0 +1,29 @@
+========================================================
+🛠️ HELPER COMMANDS (Roblox Studio Command Bar)
+========================================================
+
+📌 Load BuildLibrary (shared module):
+local RS = game:GetService("ReplicatedStorage")
+local BuildLibrary = require(RS:WaitForChild("shared"):WaitForChild("BuildLibrary"))
+
+--------------------------------------------------------
+📌 Example: Spawn Any Structure
+-- Replace "CreateDropperTall" with any constructor 
+-- function you add to BuildLibrary, and set position.
+
+BuildLibrary.CreateDropperTall(Vector3.new(0,0,0))
+-- BuildLibrary.CreateConveyor(Vector3.new(0,0,0))
+-- BuildLibrary.CreateCollector(Vector3.new(10,0,0))
+
+--------------------------------------------------------
+📌 Pattern for Other Modules
+-- You can require other shared modules the same way:
+-- local SomeModule = require(RS:WaitForChild("shared"):WaitForChild("SomeModule"))
+-- SomeModule.DoSomething(Vector3.new(0,0,0))
+
+========================================================
+📓 Notes:
+- Always require the module first.
+- Swap in the function you want to test (`CreateX`, `SpawnY`).
+- Pass in a Vector3 position to place it.
+========================================================
