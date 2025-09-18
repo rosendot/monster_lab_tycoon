@@ -1,14 +1,14 @@
 🏗️  MONSTER LAB TYCOON - CODEBASE ANALYSIS
-📅 Generated: 2025-09-17T00:59:40.284Z
+📅 Generated: 2025-09-18T04:09:00.318Z
 =============================================================
 
 📊 PROJECT STATISTICS:
    📁 Total Directories: 0
-   📄 Total Files: 17
-   📝 Total Lines of Code: 1159
+   📄 Total Files: 18
+   📝 Total Lines of Code: 1213
 
 📋 FILE TYPES:
-   .lua: 11 files
+   .lua: 12 files
    .txt: 2 files
    .json: 2 files
    .js: 1 files
@@ -33,11 +33,12 @@
     │   │   ├── HierarchyDumper.server.lua (23 lines) 🌙
     │   │   └── PlayerStatsSetup.server.lua (16 lines) 🌙
     │   ├── shared 📁
+    │   │   └── BuildLibrary.lua (53 lines) 🌙
     │   └── Hierarchy.txt (36 lines)
-    ├── CODEBASE_STRUCTURE.txt (42 lines)
+    ├── CODEBASE_STRUCTURE.txt (43 lines)
     ├── default.project.json (27 lines) ⚙️
     ├── package.json (18 lines) ⚙️
     └── README.md (194 lines) 📝
 
 =============================================================
-📊 Analysis complete! Found 17 files in 0 directories.
+📊 Analysis complete! Found 18 files in 0 directories.
