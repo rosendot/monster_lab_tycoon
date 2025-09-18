@@ -48,20 +48,20 @@ function BuildLibrary.CreateDropperTall(origin)
     local headRot = Vector3.new(-30, 0, 0)
     part(model, "Head", Vector3.new(2, 2, 2), headPos, CREAM, headRot)
 
-    -- Chimney Cap (Mario tube style), aligned to head tilt
-    local headTiltDeg = 30 -- magnitude of tilt (head is -30° about X)
+    -- Chimney Cap (Mario tube style, slimmer)
+    local headTiltDeg = 30 -- head is -30° tilt
     local ang = math.rad(headTiltDeg)
-    local up = Vector3.new(0, math.cos(ang), -math.sin(ang)) -- head's local up direction
+    local up = Vector3.new(0, math.cos(ang), -math.sin(ang))
 
     local headHalfY = 1
-    local stemSizeY = 1.2
-    local lidSizeY = 0.5
+    local stemSizeY = 0.7 -- was 1.2 → shorter
+    local lidSizeY = 0.3 -- was 0.5 → thinner
 
     local stemCenter = headPos + up * (headHalfY + stemSizeY / 2)
-    part(model, "CapStem", Vector3.new(1, 1.2, 1), stemCenter, DARK, headRot)
+    part(model, "CapStem", Vector3.new(0.8, stemSizeY, 0.8), stemCenter, DARK, headRot)
 
     local lidCenter = headPos + up * (headHalfY + stemSizeY + lidSizeY / 2)
-    part(model, "CapLid", Vector3.new(2.6, 0.5, 2.6), lidCenter, DARK, headRot)
+    part(model, "CapLid", Vector3.new(1.6, lidSizeY, 1.6), lidCenter, DARK, headRot)
 
     -- Tube + nozzle (below head, tilted same as head)
     part(model, "Tube", Vector3.new(1, 1.5, 1), origin + Vector3.new(-5.5, 6.25, 0), DARK, headRot)
